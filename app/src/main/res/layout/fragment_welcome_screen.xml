@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey"
+    tools:context=".fragments.WelcomeScreenFragment">
+
+    <com.scwang.wave.MultiWaveHeader
+        android:id="@+id/waveHeader"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:mwhVelocity="3"
+        app:mwhProgress="1"
+        app:mwhGradientAngle="45"
+        app:mwhWaveHeight="50dp"
+        app:mwhColorAlpha="0.45"
+        app:mwhStartColor="@color/purple"
+        app:mwhCloseColor="#FEC1FE"
+        app:mwhWaves="MultiWave"/>
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chatzy"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="40sp"
+
+        />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HAHAHAha ahahha ahhaha ahaa hhhzhhhzhzhz hzzhhz"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="12dp"
+        android:layout_below="@id/Title"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="16sp"
+
+        />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/text"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/robot_animation"
+
+        />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/purple"
+        android:text="continue"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="16dp"
+
+        />
+</RelativeLayout>
