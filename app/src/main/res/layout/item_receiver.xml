@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginStart="10dp"
+    android:background="@drawable/bg_receiver"
+    >
+    <TextView
+        android:id="@+id/txtMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:textAlignment="textStart"
+        android:textStyle="bold"
+        android:text="receiver Message"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="textStart"
+
+        android:textSize="12sp"
+        android:text="Mars"/>
+</LinearLayout>
