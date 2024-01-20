@@ -14,6 +14,15 @@ import android.widget.Toast
 enum class NetworkStatus{
     Available,Unavailable
 }
+fun View.visible(){
+    visibility= View.VISIBLE
+}
+fun View.invisible(){
+    visibility= View.INVISIBLE
+}
+fun View.gone(){
+    visibility= View.GONE
+}
 fun Context.hideKeyBoard (it: View) {
     try {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager

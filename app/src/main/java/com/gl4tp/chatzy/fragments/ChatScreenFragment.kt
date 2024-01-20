@@ -147,6 +147,7 @@ class ChatScreenFragment : Fragment() {
                     R.id.selectTxtMenu -> {
                         val action = ChatScreenFragmentDirections.actionChatScreenFragmentToSelectTextFragment(message)
                         findNavController().navigate(action)
+
                         return@setOnMenuItemClickListener true
                     }
                     R.id.shareTxtMenu -> {

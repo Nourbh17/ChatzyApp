@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gl4tp.chatzy.databinding.ItemReceiverBinding
 import com.gl4tp.chatzy.models.Chat
 import com.gl4tp.chatzy.databinding.ItemSenderBinding
+import com.gl4tp.chatzy.utils.copyToClipBoard
+import com.gl4tp.chatzy.utils.hideKeyBoard
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -85,8 +87,11 @@ class ChatAdapater (
         }
         else{
             (holder as ReceiverViewHolder).bind(chat)
+
         }
+
         holder.itemView.setOnLongClickListener{
+            holder.itemView.context.hideKeyBoard(it)
             if (holder.adapterPosition != -1){
                 onClickCallback(chat.message, holder.itemView)
             }
