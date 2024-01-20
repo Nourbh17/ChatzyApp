@@ -17,6 +17,7 @@ import com.gl4tp.chatzy.adapters.ChatAdapater
 import com.gl4tp.chatzy.models.Chat
 import com.gl4tp.chatzy.viewModels.ChatViewModel
 import java.util.Date
+import android.util.Log
 
 class ChatScreenFragment : Fragment() {
 
@@ -98,7 +99,7 @@ class ChatScreenFragment : Fragment() {
     private val chatViewModel : ChatViewModel by lazy {
         ViewModelProvider(this)[ChatViewModel::class.java]
     }
-
+    private var counter = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -132,5 +133,7 @@ class ChatScreenFragment : Fragment() {
     }
 
 
-
 }
+
+
+

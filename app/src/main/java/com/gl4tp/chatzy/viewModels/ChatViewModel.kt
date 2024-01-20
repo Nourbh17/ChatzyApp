@@ -7,7 +7,7 @@ import com.gl4tp.chatzy.models.Chat
 
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
     var chatList = MutableLiveData<List<Chat>> (arrayListOf())
-       // private set
+    // private set
     fun insertChat (chat: Chat){
         val modifiedChatList = ArrayList<Chat>().apply {
             addAll(chatList.value!!)
@@ -15,5 +15,4 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         modifiedChatList.add(chat)
         chatList.postValue(modifiedChatList)
     }
-
 }
