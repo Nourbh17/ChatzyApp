@@ -21,11 +21,11 @@ class ChatAdapater (
     class DiffiCallback : DiffUtil.ItemCallback<Chat>(){
 
         override fun areContentsTheSame(oldItem: Chat, newItem: Chat): Boolean {
-            TODO("Not yet implemented")
+            return oldItem == newItem
         }
 
         override fun areItemsTheSame(oldItem: Chat, newItem: Chat): Boolean {
-            TODO("Not yet implemented")
+            return oldItem.chatId == newItem.chatId
         }
 
     }
