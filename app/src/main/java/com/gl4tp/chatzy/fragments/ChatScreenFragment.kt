@@ -1,13 +1,21 @@
 package com.gl4tp.chatzy.fragments
 
+
+import android.content.Context
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
+
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.PopupMenu
+import android.widget.TextView
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,9 +23,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gl4tp.chatzy.R
 import com.gl4tp.chatzy.adapters.ChatAdapater
 import com.gl4tp.chatzy.models.Chat
+
+import com.gl4tp.chatzy.utils.copyToClipBoard
+import com.gl4tp.chatzy.utils.hideKeyBoard
+import com.gl4tp.chatzy.utils.longToastShow
+import com.gl4tp.chatzy.utils.shareMsg
 import com.gl4tp.chatzy.viewModels.ChatViewModel
 import java.util.Date
-import android.util.Log
+
 
 class ChatScreenFragment : Fragment() {
 
@@ -99,7 +112,7 @@ class ChatScreenFragment : Fragment() {
     private val chatViewModel : ChatViewModel by lazy {
         ViewModelProvider(this)[ChatViewModel::class.java]
     }
-    private var counter = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -109,19 +122,75 @@ class ChatScreenFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_chat_screen, container, false)
 
         val chatRV = view.findViewById<RecyclerView>(R.id.chatRV)
-        val chatAdapter = ChatAdapater()
+
+        val chatAdapter = ChatAdapater() { message, textView ->
+            val popup = PopupMenu(context, textView)
+
+            try {
+                val fields = popup.javaClass.declaredFields
+                for (field in fields) {
+                    if ("mPopup" == field.name) {
+                        field.isAccessible = true
+                        val menuPopupHelper = field.get(popup)
+                        val classPopupHelper = Class.forName(menuPopupHelper.javaClass.name)
+                        val setForceIcons = classPopupHelper.getMethod(
+                            "setForceShowIcon",
+                            Boolean::class.javaPrimitiveType
+                        )
+                        setForceIcons.invoke(menuPopupHelper, true)
+                        break
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            popup.menuInflater.inflate(R.menu.option_menu, popup.menu)
+            popup.setOnMenuItemClickListener { item ->
+                when(item.itemId){
+                    R.id.copyMenu -> {
+                        view.context.copyToClipBoard(message)
+                        return@setOnMenuItemClickListener true
+                    }
+                    R.id.selectTxtMenu -> {
+                        val action = ChatScreenFragmentDirections.actionChatScreenFragmentToSelectTextFragment(message)
+                        findNavController().navigate(action)
+
+                        return@setOnMenuItemClickListener true
+                    }
+                    R.id.shareTxtMenu -> {
+                        view.context.shareMsg(message)
+                        return@setOnMenuItemClickListener true
+                    }
+                    else -> {
+                        return@setOnMenuItemClickListener true
+
+                    }
+
+                }
+            }
+            popup.show()
+        }
+
         chatRV.adapter = chatAdapter
         //chatAdapter.submitList(chatList)
 
         val sendIBtn = view.findViewById<ImageButton>(R.id.sendImage)
+
+
+        val edmessage= view.findViewById<EditText>(R.id.edMessage)
         var counter = -1
         sendIBtn.setOnClickListener{
-            counter += 1
-            if(counter >= chatList.size){
-                return@setOnClickListener
-            }
-            chatViewModel.insertChat(chatList[counter])
+            view.context.hideKeyBoard(it)
+            if(edmessage.text.toString().trim().isNotEmpty()) {
+                counter += 1
+                if (counter >= chatList.size) {
+                    return@setOnClickListener
+                }
+                chatViewModel.insertChat(chatList[counter])
+            } else {view.context.longToastShow("message is required")}
         }
+
+
         chatViewModel.chatList.observe(viewLifecycleOwner){
             chatAdapter.submitList(it)
             chatRV.smoothScrollToPosition(it.size)
@@ -133,7 +202,10 @@ class ChatScreenFragment : Fragment() {
     }
 
 
+
+
+
+
+
 }
-
-
 

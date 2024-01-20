@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+   <item android:id="@+id/copyMenu"
+       android:title="copy"
+       android:icon="@drawable/ic_copy"/>
+
+    <item android:id="@+id/selectTxtMenu"
+        android:title="select texte"
+        android:icon="@drawable/ic_select_all"/>
+
+    <item android:id="@+id/shareTxtMenu"
+        android:title="share"
+        android:icon="@drawable/ic_share"/>
+
+</menu>
