@@ -47,7 +47,8 @@ dependencies {
     //classpath("com.android.tools.build:gradle:7.2.0")
     //classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10")
     // ... other dependencies ...
-
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.3.0")
 
     // splash screen
     implementation("androidx.core:core-splashscreen:1.0.1")

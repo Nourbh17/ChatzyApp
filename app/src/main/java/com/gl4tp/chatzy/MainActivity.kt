@@ -5,13 +5,7 @@ import android.os.Bundle
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-<<<<<<< HEAD
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.fragment.NavHostFragment
 
-class MainActivity : AppCompatActivity() {
-=======
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -24,7 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
     private val networkConnectivityObserver: NetworkConnectivityObserver by lazy {
         NetworkConnectivityObserver(this)}
->>>>>>> cebeca8bd4ffe0dd9630b8a8ecfeb2e333792d03
+
    // private lateinit var navController
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
@@ -35,8 +29,7 @@ class MainActivity : AppCompatActivity() {
         // and some api call here
         // if setKeepOnScreenCondition true so, activity code not redirect another activity
         splashScreen.setKeepOnScreenCondition { false }
-<<<<<<< HEAD
-=======
+
         val snackbar = Snackbar.make(
             findViewById(android.R.id.content),
 
@@ -59,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                }
            }
        }
->>>>>>> cebeca8bd4ffe0dd9630b8a8ecfeb2e333792d03
+
 
        // val navHostFragment =
          //   supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment

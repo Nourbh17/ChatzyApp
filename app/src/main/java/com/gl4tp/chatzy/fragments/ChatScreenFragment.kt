@@ -178,16 +178,22 @@ class ChatScreenFragment : Fragment() {
 
 
         val edmessage= view.findViewById<EditText>(R.id.edMessage)
-        var counter = -1
+        //var counter = -1
         sendIBtn.setOnClickListener{
             view.context.hideKeyBoard(it)
             if(edmessage.text.toString().trim().isNotEmpty()) {
-                counter += 1
+                /*counter += 1
                 if (counter >= chatList.size) {
                     return@setOnClickListener
                 }
                 chatViewModel.insertChat(chatList[counter])
-            } else {view.context.longToastShow("message is required")}
+                */
+                chatViewModel.createChatCompletion(edmessage.text.toString().trim())
+
+            }
+            else {
+                view.context.longToastShow("message is required")
+            }
         }
 
 
