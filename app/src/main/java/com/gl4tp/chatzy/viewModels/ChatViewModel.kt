@@ -17,14 +17,14 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
 
 
 
-    fun createChatCompletion(message: String){
+    fun createChatCompletion(message: String,robotId:String){
 
-        chatRepository.createChatCompletion(message)
+        chatRepository.createChatCompletion(message,robotId)
 
     }
-    fun getChatList(){
+    fun getChatList(robotId:String){
 
-        chatRepository.getChatList()
+        chatRepository.getChatList(robotId)
 
     }
 

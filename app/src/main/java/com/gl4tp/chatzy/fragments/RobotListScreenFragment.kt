@@ -14,7 +14,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.gl4tp.chatzy.R
+import com.gl4tp.chatzy.adapters.RobotAdapter
 import com.gl4tp.chatzy.models.Robot
 import com.gl4tp.chatzy.utils.Status
 import com.gl4tp.chatzy.utils.StatusResult
@@ -26,6 +28,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 /**
@@ -72,32 +79,100 @@ class RobotListScreenFragment : Fragment() {
         }
         //val action =RobotListScreenFragmentDirections.actionRobotListScreenFragmentToChatScreenFragment()
         //findNavController().navigate(action)
+        val robotAdapter = RobotAdapter{
+            type, position, robot ->
+            when(type){
+                "delete"->{
+                    robotViewModel.deleteRobotUsingId(robot.robotId)
+                }
+                "update"->{
+                    updateRobotDialog(view,robot)
+                }
+                else ->{
+                    val action = RobotListScreenFragmentDirections.actionRobotListScreenFragmentToChatScreenFragment(
+                        robot.robotId,
+                        robot.robotImg,
+                        robot.robotName
+                        )
+                    findNavController().navigate(action)
+
+                }
+            }
+        }
+        val robotRV = view.findViewById<RecyclerView>(R.id.robotRV)
+        robotRV.adapter = robotAdapter
+        robotAdapter.registerAdapterDataObserver(
+            object : RecyclerView.AdapterDataObserver(){
+                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                    super.onItemRangeInserted(positionStart, itemCount)
+                    robotRV.smoothScrollToPosition(positionStart)
+                }
+            }
+        )
+        callGetRobotList(robotAdapter,view)
+        robotViewModel.getRobotList()
         statusCallback(view)
 
     }
 
+    private fun callGetRobotList(robotAdapter: RobotAdapter, view: View) {
+        CoroutineScope(Dispatchers.Main).launch {
+            robotViewModel
+                .robotStateFlow
+                .collectLatest {
+                    when (it.status){
+                        Status.LOADING ->{}
+                        Status.SUCCESS ->{
+
+                            it.data?.collect(){
+                                robotList -> robotAdapter.submitList(robotList)
+                            }
+
+                        }
+                        Status.ERROR -> {it.message?.let { it1->view.context.longToastShow(it1) }}
+
+                    }
+                }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        robotViewModel.clearStatusLiveData()
+    }
     private fun statusCallback(view : View){
         robotViewModel
             .statusLiveData
             .observe(viewLifecycleOwner)
             {
-                when(it.status){
-                    Status.LOADING -> {
 
-                    }
-                    Status.SUCCESS -> {
+                if (it != null) {
+                    when (it.status) {
+                        Status.LOADING -> {
 
-                        when(it.data as StatusResult){
-                            StatusResult.Added ->{
-                                Log.d("StatusResult","Added")
-                            }
                         }
 
-                      it.message?.let {   it1 -> view.context.longToastShow(it1) }
-                    }
-                    Status.ERROR-> {
+                        Status.SUCCESS -> {
+                            when (it.data as StatusResult) {
+                                StatusResult.Added -> {
+                                    Log.d("StatusResult", "Added")
+                                }
 
-                        it.message?.let {   it1 -> view.context.longToastShow(it1) }
+                                StatusResult.Updated -> {
+                                    Log.d("StatusResult", "Updated")
+                                }
+
+                                StatusResult.Deleted -> {
+                                    Log.d("StatusResult", "Deleted")
+                                }
+                            }
+                            it.message?.let { it1 -> view.context.longToastShow(it1) }
+                        }
+
+                        Status.ERROR -> {
+
+                            it.message?.let { it1 -> view.context.longToastShow(it1) }
+                        }
                     }
                 }
             }
@@ -132,8 +207,7 @@ class RobotListScreenFragment : Fragment() {
                         Robot (
                             UUID.randomUUID().toString(),
                             robotName,
-                            robotImageList.random()
-
+                            (robotImageList.indices).random()
                         )
                     )
                 }
@@ -147,6 +221,52 @@ class RobotListScreenFragment : Fragment() {
             .setNegativeButton("Cancel", null)
             .create()
             .show()
+    }
+    private fun updateRobotDialog(view: View,robot:Robot){
+
+        val edRobotName = TextInputEditText(view.context)
+        edRobotName.hint = "Enter Robot Name"
+
+        edRobotName.maxLines = 3
+
+        val textInputLayout = TextInputLayout(view.context)
+        val container = FrameLayout(view.context)
+        val params = FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+
+        )
+
+        params.setMargins(50,30,50,30)
+        textInputLayout.addView(edRobotName)
+        container.addView(textInputLayout)
+
+        MaterialAlertDialogBuilder(view.context)
+            .setTitle("Update Robot")
+            .setView(container)
+            .setCancelable(false)
+            .setPositiveButton("Update"){ dialog, which ->
+                val robotName = edRobotName.text.toString().trim()
+                if(robotName.isNotEmpty()){
+                    robotViewModel.updateRobot(
+                        Robot (
+                            robot.robotId,
+                            robotName,
+                            robot.robotImg
+                        )
+                    )
+                }
+
+                else {
+
+                    view.context.longToastShow("Required")
+                }
+
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+            .show()
+        edRobotName.setText(robot.robotName)
     }
 
 

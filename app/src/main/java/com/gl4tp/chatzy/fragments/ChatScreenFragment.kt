@@ -8,17 +8,21 @@ import android.view.ViewGroup
 
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.PopupMenu
+import android.widget.TextView
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.gl4tp.chatzy.R
 import com.gl4tp.chatzy.adapters.ChatAdapater
 import com.gl4tp.chatzy.utils.Status
 
 import com.gl4tp.chatzy.utils.copyToClipBoard
+import com.gl4tp.chatzy.utils.gone
 import com.gl4tp.chatzy.utils.hideKeyBoard
 import com.gl4tp.chatzy.utils.longToastShow
 import com.gl4tp.chatzy.utils.shareMsg
@@ -38,12 +42,27 @@ class ChatScreenFragment : Fragment() {
     }
 
 
+    private val chatArgs : ChatScreenFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_chat_screen, container, false)
+
+        val toolbarview = view.findViewById<View>(R.id.toolbarLayout)
+
+        val closeimage =toolbarview.findViewById<ImageView>(R.id.backImg)
+        val robotimage =toolbarview.findViewById<ImageView>(R.id.robotImage)
+
+        robotimage.setImageResource(chatArgs.robotImg)
+        closeimage.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        val titleTxt= toolbarview.findViewById<TextView>(R.id.titleTxt)
+        titleTxt.text= chatArgs.robotName
 
         val chatRV = view.findViewById<RecyclerView>(R.id.chatRV)
 
@@ -114,7 +133,7 @@ class ChatScreenFragment : Fragment() {
             view.context.hideKeyBoard(it)
             if(edmessage.text.toString().trim().isNotEmpty()) {
 
-                chatViewModel.createChatCompletion(edmessage.text.toString().trim())
+                chatViewModel.createChatCompletion(edmessage.text.toString().trim(),chatArgs.robotId)
                 edmessage.text=null
 
             }
@@ -125,7 +144,7 @@ class ChatScreenFragment : Fragment() {
 
 
         callGetChatList(chatRV, chatAdapter)
-        chatViewModel.getChatList()
+        chatViewModel.getChatList(chatArgs.robotId)
 
         return view
     }

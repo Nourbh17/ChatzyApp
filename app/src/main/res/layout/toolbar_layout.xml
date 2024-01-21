@@ -40,13 +40,17 @@
     <TextView
         android:id="@+id/titleTxt"
         android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         tools:text="Robot Name"
         android:textColor="@color/white"
         android:layout_toEndOf="@+id/robotImageLL"
         android:textSize="20dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="10dp"
+        android:singleLine="true"
+        />
 
 </RelativeLayout>

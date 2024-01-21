@@ -49,6 +49,7 @@
          android:textAlignment="viewStart"
          android:textColor="@color/black"
          android:textSize="16sp"/>
+
         <ImageButton
             android:id="@+id/sendImage"
             android:layout_width="50dp"
@@ -59,7 +60,7 @@
             android:background="@drawable/bg_send_btn"
             android:src="@drawable/ic_send"
             android:backgroundTint="@color/black"
-            />
+             />
 
     </RelativeLayout>
 

@@ -24,7 +24,9 @@ val robotImageList = listOf(
 
 )
 enum class StatusResult{
-    Added
+    Added,
+    Deleted,
+    Updated
 }
 
 
