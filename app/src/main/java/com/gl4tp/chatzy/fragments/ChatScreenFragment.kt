@@ -23,91 +23,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gl4tp.chatzy.R
 import com.gl4tp.chatzy.adapters.ChatAdapater
 import com.gl4tp.chatzy.models.Chat
+import com.gl4tp.chatzy.utils.Status
 
 import com.gl4tp.chatzy.utils.copyToClipBoard
 import com.gl4tp.chatzy.utils.hideKeyBoard
 import com.gl4tp.chatzy.utils.longToastShow
 import com.gl4tp.chatzy.utils.shareMsg
 import com.gl4tp.chatzy.viewModels.ChatViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.Date
 
 
 class ChatScreenFragment : Fragment() {
 
-    private val chatList = arrayListOf(
-        Chat(
-            "1",
-            "Hi, how can I integrate Retrofit in Android development?",
-            "sender",
-            Date()
-        ),
-        Chat(
-            "2",
-            "You can integrate Retrofit by adding it as a dependency in your app's build.gradle file.",
-            "receiver",
-            Date()
-        ),
-        Chat(
-            "3",
-            "What is the purpose of ViewModel in MVVM architecture?",
-            "sender",
-            Date()
-        ),
-        Chat(
-            "4",
-            "ViewModel is used to store and manage UI-related data, separating it from the UI components.",
-            "receiver",
-            Date()
-        ),
-        Chat(
-            "5",
-            "What is the purpose of ViewModel in MVVM architecture?",
-            "sender",
-            Date()
-        ),
-        Chat(
-            "6",
-            "ViewModel is used to store and manage UI-related data, separating it from the UI components.",
-            "receiver",
-            Date()
-        ),
-        Chat(
-            "7",
-            "How do I implement a RecyclerView in Android?",
-            "sender",
-            Date()
-        ),
-        Chat(
-            "8",
-            "You can create a RecyclerView by defining a layout, adapter, and connecting it to your data source.",
-            "receiver",
-            Date()
-        ),
-        Chat(
-            "9",
-            "Can you suggest a good Android IDE?",
-            "sender",
-            Date()
-        ),
-        Chat(
-            "10",
-            "Android Studio is the official IDE for Android app development and is highly recommended.",
-            "receiver",
-            Date()
-        ),
-        Chat(
-            "11",
-            "How can I implement a swipe-to-refresh feature in my Android app?",
-            "sender",
-            Date()
-        ),
-        Chat(
-            "12",
-            "You can implement swipe-to-refresh by using the SwipeRefreshLayout widget in your layout XML and handling refresh events in your code.",
-            "receiver",
-            Date()
-        )
-    )
+
 
     private val chatViewModel : ChatViewModel by lazy {
         ViewModelProvider(this)[ChatViewModel::class.java]
@@ -172,6 +104,13 @@ class ChatScreenFragment : Fragment() {
         }
 
         chatRV.adapter = chatAdapter
+        chatAdapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver()
+        {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                chatRV.smoothScrollToPosition(positionStart)
+            }
+        })
         //chatAdapter.submitList(chatList)
 
         val sendIBtn = view.findViewById<ImageButton>(R.id.sendImage)
@@ -182,13 +121,9 @@ class ChatScreenFragment : Fragment() {
         sendIBtn.setOnClickListener{
             view.context.hideKeyBoard(it)
             if(edmessage.text.toString().trim().isNotEmpty()) {
-                /*counter += 1
-                if (counter >= chatList.size) {
-                    return@setOnClickListener
-                }
-                chatViewModel.insertChat(chatList[counter])
-                */
+
                 chatViewModel.createChatCompletion(edmessage.text.toString().trim())
+                edmessage.text=null
 
             }
             else {
@@ -197,20 +132,31 @@ class ChatScreenFragment : Fragment() {
         }
 
 
-        chatViewModel.chatList.observe(viewLifecycleOwner){
-            chatAdapter.submitList(it)
-            chatRV.smoothScrollToPosition(it.size)
-        }
-
-
+        callGetChatList(chatRV, chatAdapter)
+        chatViewModel.getChatList()
 
         return view
     }
 
+    private fun callGetChatList(chatRV: RecyclerView, chatAdapter: ChatAdapater) {
+         CoroutineScope(Dispatchers.Main).launch {
+             chatViewModel
+                 .chatStateFlow
+                 .collectLatest {
+                     when(it.status){
+                         Status.LOADING -> {}
+                         Status.SUCCESS -> {
+                             it.data?.collect{ chatList ->
+                             chatAdapter.submitList(chatList)}
+                         }
+                         Status.ERROR -> {
+                             it.message?.let { it1 -> chatRV.context.longToastShow(it1) }
+                         }
 
-
-
-
+                     }
+                 }
+         }
+    }
 
 
 }
