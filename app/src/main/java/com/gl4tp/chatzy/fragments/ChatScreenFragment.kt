@@ -1,17 +1,21 @@
 package com.gl4tp.chatzy.fragments
 
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
-
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,17 +24,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gl4tp.chatzy.R
 import com.gl4tp.chatzy.adapters.ChatAdapater
 import com.gl4tp.chatzy.utils.Status
-
 import com.gl4tp.chatzy.utils.copyToClipBoard
-import com.gl4tp.chatzy.utils.gone
 import com.gl4tp.chatzy.utils.hideKeyBoard
 import com.gl4tp.chatzy.utils.longToastShow
+import com.gl4tp.chatzy.utils.robotImageList
 import com.gl4tp.chatzy.utils.shareMsg
 import com.gl4tp.chatzy.viewModels.ChatViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 
 class ChatScreenFragment : Fragment() {
@@ -41,9 +45,11 @@ class ChatScreenFragment : Fragment() {
         ViewModelProvider(this)[ChatViewModel::class.java]
     }
 
+    private lateinit var edMessage : EditText
 
     private val chatArgs : ChatScreenFragmentArgs by navArgs()
 
+    private lateinit var textToSpeech: TextToSpeech
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,9 +62,20 @@ class ChatScreenFragment : Fragment() {
         val closeimage =toolbarview.findViewById<ImageView>(R.id.backImg)
         val robotimage =toolbarview.findViewById<ImageView>(R.id.robotImage)
 
-        robotimage.setImageResource(chatArgs.robotImg)
+        robotimage.setImageResource(robotImageList[chatArgs.robotImg])
         closeimage.setOnClickListener {
             findNavController().navigateUp()
+        }
+        //text to speech
+        textToSpeech = TextToSpeech(view.context) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val result = textToSpeech.setLanguage(Locale.getDefault())
+                if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED
+                ) {
+                    view.context.longToastShow("language is not supported")
+                }
+            }
         }
 
         val titleTxt= toolbarview.findViewById<TextView>(R.id.titleTxt)
@@ -91,16 +108,29 @@ class ChatScreenFragment : Fragment() {
             popup.setOnMenuItemClickListener { item ->
                 when(item.itemId){
                     R.id.copyMenu -> {
+                        textToSpeech.stop()
                         view.context.copyToClipBoard(message)
                         return@setOnMenuItemClickListener true
                     }
                     R.id.selectTxtMenu -> {
+                        textToSpeech.stop()
                         val action = ChatScreenFragmentDirections.actionChatScreenFragmentToSelectTextFragment(message)
                         findNavController().navigate(action)
 
                         return@setOnMenuItemClickListener true
                     }
+                    R.id.TextToVoiceMenu ->{
+                        textToSpeech.speak(
+                            message,
+                            TextToSpeech.QUEUE_FLUSH,
+                            null,
+                            null
+                        )
+
+                        return@setOnMenuItemClickListener true
+                    }
                     R.id.shareTxtMenu -> {
+                        textToSpeech.stop()
                         view.context.shareMsg(message)
                         return@setOnMenuItemClickListener true
                     }
@@ -127,28 +157,63 @@ class ChatScreenFragment : Fragment() {
         val sendIBtn = view.findViewById<ImageButton>(R.id.sendImage)
 
 
-        val edmessage= view.findViewById<EditText>(R.id.edMessage)
+         edMessage= view.findViewById(R.id.edMessage)
         //var counter = -1
         sendIBtn.setOnClickListener{
+            textToSpeech.stop()
             view.context.hideKeyBoard(it)
-            if(edmessage.text.toString().trim().isNotEmpty()) {
+            if(edMessage.text.toString().trim().isNotEmpty()) {
 
-                chatViewModel.createChatCompletion(edmessage.text.toString().trim(),chatArgs.robotId)
-                edmessage.text=null
+                chatViewModel.createChatCompletion(edMessage.text.toString().trim(),chatArgs.robotId)
+                edMessage.text=null
 
             }
             else {
                 view.context.longToastShow("message is required")
+
             }
         }
 
-
+        val speechToTextBtn = view.findViewById<ImageButton>(R.id.voiceToTextBtn)
+        speechToTextBtn.setOnClickListener {
+            textToSpeech.stop()
+            edMessage.text = null
+            try {
+                val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+                intent.putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+                )
+                intent.putExtra(
+                    RecognizerIntent.EXTRA_LANGUAGE,
+                    Locale.getDefault()
+                )
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Say something")
+                result.launch(intent)
+            }catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
         callGetChatList(chatRV, chatAdapter)
         chatViewModel.getChatList(chatArgs.robotId)
 
         return view
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        textToSpeech.stop()
+    }
+    private val result = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result->
+        if (result.resultCode == Activity.RESULT_OK){
+            val results = result.data?.getStringArrayListExtra(
+                RecognizerIntent.EXTRA_RESULTS
+            ) as ArrayList<String>
+
+            edMessage.setText(results[0])
+        }
+    }
     private fun callGetChatList(chatRV: RecyclerView, chatAdapter: ChatAdapater) {
          CoroutineScope(Dispatchers.Main).launch {
              chatViewModel

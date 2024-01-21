@@ -18,7 +18,6 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="16dp"
         android:foreground="?android:attr/selectableItemBackground"
-
         android:src="@drawable/ic_back"/>
 
     <com.google.android.material.circularreveal.cardview.CircularRevealCardView

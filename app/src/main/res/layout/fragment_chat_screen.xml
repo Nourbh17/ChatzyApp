@@ -7,8 +7,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ChatScreenFragment">
 
+
     <include layout= "@layout/toolbar_layout"
         android:id="@+id/toolbarLayout"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRV"
         android:layout_width="match_parent"
@@ -31,24 +33,35 @@
         android:layout_centerHorizontal="true"
 
         >
+        <ImageButton
+            android:id="@+id/voiceToTextBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_edittext"
+            android:src="@drawable/ic_voice"
+
+            />
         <EditText
             android:id="@+id/edMessage"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginStart="8dp"
-         android:background="@drawable/bg_edittext"
-         android:layout_toStartOf="@id/sendImage"
-
-         android:hint="Message"
-         android:inputType="textMultiLine"
-         android:maxLines="5"
-         android:minHeight="50dp"
-         android:paddingHorizontal="8dp"
-         android:paddingVertical="4dp"
-         android:scrollbars="vertical"
-         android:textAlignment="viewStart"
-         android:textColor="@color/black"
-         android:textSize="16sp"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_edittext"
+            android:layout_toStartOf="@id/sendImage"
+            android:layout_toEndOf="@+id/voiceToTextBtn"
+            android:hint="Message"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:minHeight="50dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:scrollbars="vertical"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
 
         <ImageButton
             android:id="@+id/sendImage"
