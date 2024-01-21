@@ -1,13 +1,25 @@
 package com.gl4tp.chatzy.network
 
 import com.gl4tp.chatzy.utils.BASE_URL
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    private val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
+    private val  okHttpClient = OkHttpClient
+        .Builder()
+        .connectTimeout(1,TimeUnit.MINUTES)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60,TimeUnit.SECONDS)
+        .build()
+
+    private val retrofit = Retrofit
+        .Builder()
+        .baseUrl(BASE_URL)
+        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         // we need to add converter factory to
         // convert JSON object to Java object

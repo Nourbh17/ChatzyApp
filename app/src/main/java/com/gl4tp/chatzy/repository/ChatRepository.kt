@@ -5,7 +5,6 @@ import com.gl4tp.chatzy.database.chatzyDatabase
 import com.gl4tp.chatzy.models.Chat
 import com.gl4tp.chatzy.network.ApiClient
 import com.gl4tp.chatzy.response.ChatRequest
-import com.gl4tp.chatzy.response.ChatResponse
 import com.gl4tp.chatzy.response.Message
 import com.gl4tp.chatzy.utils.Resource
 import com.gl4tp.chatzy.utils.longToastShow
@@ -19,9 +18,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.Date
 import java.util.UUID
 

@@ -9,6 +9,24 @@ import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.gl4tp.chatzy.R
+
+
+val robotImageList = listOf(
+    R.drawable.robot_1,
+    R.drawable.robot_2,
+    R.drawable.robot_3,
+    R.drawable.robot_4,
+    R.drawable.robot_5,
+    R.drawable.robot_6,
+    R.drawable.robot_7,
+    R.drawable.robot_8
+
+)
+enum class StatusResult{
+    Added
+}
+
 
 enum class Status{
     LOADING,
@@ -34,7 +52,7 @@ fun Context.hideKeyBoard (it: View) {
         e.printStackTrace()
     }
 }
-fun Context.longToastShow(message : String){
+fun Context.longToastShow(message: String){
 
     Toast.makeText(this,message ,Toast.LENGTH_LONG).show()
 }

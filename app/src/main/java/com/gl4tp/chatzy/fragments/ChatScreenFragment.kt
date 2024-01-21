@@ -1,20 +1,14 @@
 package com.gl4tp.chatzy.fragments
 
 
-import android.content.Context
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Button
 
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.PopupMenu
-import android.widget.TextView
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -22,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.gl4tp.chatzy.R
 import com.gl4tp.chatzy.adapters.ChatAdapater
-import com.gl4tp.chatzy.models.Chat
 import com.gl4tp.chatzy.utils.Status
 
 import com.gl4tp.chatzy.utils.copyToClipBoard
@@ -34,7 +27,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.Date
 
 
 class ChatScreenFragment : Fragment() {

@@ -8,20 +8,24 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.gl4tp.chatzy.conveters.TypeConverter
 import com.gl4tp.chatzy.dao.ChatDao
+import com.gl4tp.chatzy.dao.RobotDao
 import com.gl4tp.chatzy.models.Chat
+import com.gl4tp.chatzy.models.Robot
 import com.gl4tp.chatzy.network.ApiInterface
 import com.gl4tp.chatzy.utils.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Database(
-    entities = [Chat::class],
+    entities = [Chat::class, Robot::class] ,
     version= 1,
     exportSchema = false
 )
 @TypeConverters(TypeConverter::class)
 abstract class chatzyDatabase : RoomDatabase() {
     abstract val chatdao: ChatDao
+
+    abstract  val robotDao: RobotDao
 
     companion object {
         @Volatile
