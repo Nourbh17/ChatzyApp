@@ -43,6 +43,7 @@ The inclusion of intuitive popup menus enhances overall user interactions, contr
 
 ![Screenshot 2024-01-23 230759](https://github.com/Nourbh17/ChatzyApp/assets/92574404/8f79aff5-069e-460c-8f0a-12c11266ed62)
 
+
 ![Screenshot 2024-01-23 232453](https://github.com/Nourbh17/ChatzyApp/assets/92574404/f3cb3669-c750-4a78-bae5-e8dcf9c88255)
 
 
@@ -61,9 +62,12 @@ In this crucial phase, we seamlessly incorporated the Room Database into our cha
 
 ![Screenshot 2024-01-23 231459](https://github.com/Nourbh17/ChatzyApp/assets/92574404/23e12c68-1eae-4955-95bd-e35ffff43485)
 
+
 ![Screenshot 2024-01-23 231518](https://github.com/Nourbh17/ChatzyApp/assets/92574404/39262287-216a-4411-ab0c-9b7b3d42ac68)
 
+
 ![Screenshot 2024-01-23 231535](https://github.com/Nourbh17/ChatzyApp/assets/92574404/f8325934-4ad0-41cb-9801-75313916b7d1)
+
 
 # 6-Inserting Robots : 
 
@@ -81,6 +85,7 @@ In this section, we explored the functionality to view, update, and delete robot
 
 ![Screenshot 2024-01-23 230649](https://github.com/Nourbh17/ChatzyApp/assets/92574404/1821cff1-227e-419d-87cc-aad4cb5ddd2d)
 
+
 ![Screenshot 2024-01-23 230706](https://github.com/Nourbh17/ChatzyApp/assets/92574404/97ade397-c517-4426-b7b5-bd1c65aa9420)
 
 
@@ -92,6 +97,10 @@ In this section, we utilized the Kotlin Speech to Voice library to implement Tex
 
 
 ![Screenshot 2024-01-23 230744](https://github.com/Nourbh17/ChatzyApp/assets/92574404/83bad7f4-83d9-4760-bb0f-e933e7391b80)
+
+
+![Screenshot 2024-01-23 232902](https://github.com/Nourbh17/ChatzyApp/assets/92574404/26d5d1b4-8d63-417d-90c4-9d1cc18ffd17)
+
 
 
 
