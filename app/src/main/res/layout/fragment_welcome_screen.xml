@@ -39,7 +39,7 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HAHAHAha ahahha ahhaha ahaa hhhzhhhzhzhz hzzhhz"
+        android:text="  Unleash your inner chat-terbox"
         android:layout_centerHorizontal="true"
         android:layout_margin="12dp"
         android:layout_below="@id/Title"
@@ -53,15 +53,17 @@
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/text"
         android:layout_above="@+id/button"
+        android:layout_below="@+id/text"
         android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/robot_animation"
-
-        />
+        app:lottie_rawRes="@raw/robot_animation"/>
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
