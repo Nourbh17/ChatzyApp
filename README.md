@@ -68,8 +68,6 @@ In this segment, we delve into the exciting process of incorporating robots into
 ![Screenshot 2024-01-23 232135](https://github.com/Nourbh17/ChatzyApp/assets/92574404/63f77188-04c4-41ef-b92d-1e900d8d0951)
 
 
-![Screenshot 2024-01-23 230617](https://github.com/Nourbh17/ChatzyApp/assets/92574404/9532064b-5ec2-4417-b0a9-91d1c6a3b094)
-
 # 7-Managing Robots :
 
 In this section, we explored the functionality to view, update, and delete robots in your app. We implemented navigation and utilized Retrofit to efficiently manage robots, empowering users with complete control over their robot interactions.
