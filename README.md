@@ -3,6 +3,16 @@ This application offers an innovative conversational experience, driven by a dyn
 effectively managing data and user interactions. Featuring UI design, RecyclerView, Room database integration, and Retrofit for API communication, it goes beyond with advanced functionalities such as text copying 
 and sharing. Additionally, it seamlessly integrates the OpenAI API to enhance the conversational intelligence.
 
+# Features:
+
+Chat with ChatGPT in real-time.
+Create and manage new chats.
+Copy text from the chat interface.
+Text-to-voice and voice-to-text functionalities.
+API : OpenAI API https://platform.openai.com/docs/introduction
+
+# Details :
+
 # 1-Design Welcome Screen :
 
 In this initial phase, we meticulously crafted the Welcome Screen for the App. Utilizing Android Studio's layout editor, we engineered a welcoming interface designed to be user-friendly and visually appealing. 
