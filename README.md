@@ -23,17 +23,26 @@ In this initial phase, we meticulously crafted the Welcome Screen for the App. U
 As a foundational step, we established crucial dependencies, including Retrofit for seamless API integration and Room for efficient local storage. Furthermore, we diligently implemented the MVVM architecture,
 providing a robust structural framework for the application.
 
+![Screenshot 2024-01-23 230422](https://github.com/Nourbh17/ChatzyApp/assets/92574404/36932b49-dc65-40bb-a1a7-fea43dfbedf3)
+
+
 # 2-Designing Chat Screen :
 
 In this phase, our attention shifts towards crafting the Chat Screen. Our meticulous approach involves building a user interface with a RecyclerView, implementing DiffUtil for efficient UI updates, and seamlessly
 integrating the MVVM architecture to manage data effectively. As we progress through this part, the Chat Screen evolves into a sophisticated space ready to elegantly display messages, ensuring a seamless and 
 visually engaging user experience.
 
+![Screenshot 2024-01-23 230729](https://github.com/Nourbh17/ChatzyApp/assets/92574404/fd7e8145-3fb6-4dbe-b96d-0699082a9cc0)
+
+
 # 3-Advanced Features :
 
 In this pivotal stage, We have diligently implemented internet connectivity checks to ensure a seamless user experience. Leveraging the Clipboard Manager, users can effortlessly copy messages,while Share Intents 
 facilitate quick sharing of messages across different applications. Furthermore, we've empowered users with the ability to select and manipulate text within the chat, adding an extra layer of interactivity. 
 The inclusion of intuitive popup menus enhances overall user interactions, contributing to a sophisticated and dynamic app experience.
+
+![Screenshot 2024-01-23 230759](https://github.com/Nourbh17/ChatzyApp/assets/92574404/8f79aff5-069e-460c-8f0a-12c11266ed62)
+
 
 # 4-Integrating OpenAI API :
 
@@ -45,19 +54,39 @@ conversations within the app, enriching the user experience with the advanced ca
 
 In this crucial phase, we seamlessly incorporated the Room Database into our chat screen. By setting up Room, we established a robust mechanism to store chat history locally, empowering users to access their conversations even in offline scenarios. This integration is pivotal for ensuring a seamless user experience, as it enhances the app's functionality by providing persistent access to chat interactions, regardless of the user's connectivity status.
 
+![Screenshot 2024-01-23 231459](https://github.com/Nourbh17/ChatzyApp/assets/92574404/23e12c68-1eae-4955-95bd-e35ffff43485)
+
+![Screenshot 2024-01-23 231518](https://github.com/Nourbh17/ChatzyApp/assets/92574404/39262287-216a-4411-ab0c-9b7b3d42ac68)
+
+![Screenshot 2024-01-23 231535](https://github.com/Nourbh17/ChatzyApp/assets/92574404/f8325934-4ad0-41cb-9801-75313916b7d1)
+
 # 6-Inserting Robots : 
 
 In this segment, we delve into the exciting process of incorporating robots into the Robot Screen, leveraging both Retrofit and the MVVM architecture.
 
+
+![Screenshot 2024-01-23 232135](https://github.com/Nourbh17/ChatzyApp/assets/92574404/63f77188-04c4-41ef-b92d-1e900d8d0951)
+
+
+![Screenshot 2024-01-23 230617](https://github.com/Nourbh17/ChatzyApp/assets/92574404/9532064b-5ec2-4417-b0a9-91d1c6a3b094)
+
 # 7-Managing Robots :
 
 In this section, we explored the functionality to view, update, and delete robots in your app. We implemented navigation and utilized Retrofit to efficiently manage robots, empowering users with complete control over their robot interactions.
+
+![Screenshot 2024-01-23 230649](https://github.com/Nourbh17/ChatzyApp/assets/92574404/1821cff1-227e-419d-87cc-aad4cb5ddd2d)
+
+![Screenshot 2024-01-23 230706](https://github.com/Nourbh17/ChatzyApp/assets/92574404/97ade397-c517-4426-b7b5-bd1c65aa9420)
+
 
 # 8-Text To Speech and Voice to Text : 
 
 In this part, we will incorporate Text To Speech (TTS) and Voice to Text (VTT) capabilities into the app. Users will have the ability to convert text messages to speech and employ voice input for sending messages, offering a more dynamic and inclusive communication experience.
 
 In this section, we utilized the Kotlin Speech to Voice library to implement Text To Speech (TTS) functionality 
+
+
+![Screenshot 2024-01-23 230744](https://github.com/Nourbh17/ChatzyApp/assets/92574404/83bad7f4-83d9-4760-bb0f-e933e7391b80)
 
 
 
