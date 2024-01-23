@@ -27,6 +27,24 @@ In this pivotal stage, we seamlessly integrated the OpenAI API into our applicat
 precise API requests, adeptly handling responses, and prioritizing secure API key management to safeguard user interactions. This strategic integration opens up a world of possibilities for dynamic and intelligent
 conversations within the app, enriching the user experience with the advanced capabilities of GPT-3.
 
+# 5-Room Database Integration :
+
+In this crucial phase, we seamlessly incorporated the Room Database into our chat screen. By setting up Room, we established a robust mechanism to store chat history locally, empowering users to access their conversations even in offline scenarios. This integration is pivotal for ensuring a seamless user experience, as it enhances the app's functionality by providing persistent access to chat interactions, regardless of the user's connectivity status.
+
+# 6-Inserting Robots : 
+
+In this segment, we delve into the exciting process of incorporating robots into the Robot Screen, leveraging both Retrofit and the MVVM architecture.
+
+# 7-Managing Robots :
+
+In this section, we explored the functionality to view, update, and delete robots in your app. We implemented navigation and utilized Retrofit to efficiently manage robots, empowering users with complete control over their robot interactions.
+
+# 8-Text To Speech and Voice to Text : 
+
+In this part, we will incorporate Text To Speech (TTS) and Voice to Text (VTT) capabilities into the app. Users will have the ability to convert text messages to speech and employ voice input for sending messages, offering a more dynamic and inclusive communication experience.
+
+In this section, we utilized the Kotlin Speech to Voice library to implement Text To Speech (TTS) functionality 
+
 
 
 
