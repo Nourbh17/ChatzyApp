@@ -43,6 +43,11 @@ The inclusion of intuitive popup menus enhances overall user interactions, contr
 
 ![Screenshot 2024-01-23 230759](https://github.com/Nourbh17/ChatzyApp/assets/92574404/8f79aff5-069e-460c-8f0a-12c11266ed62)
 
+![Screenshot 2024-01-23 232453](https://github.com/Nourbh17/ChatzyApp/assets/92574404/f3cb3669-c750-4a78-bae5-e8dcf9c88255)
+
+
+![Screenshot 2024-01-23 232554](https://github.com/Nourbh17/ChatzyApp/assets/92574404/b754661c-a21f-4ec7-b378-1e350641754b)
+
 
 # 4-Integrating OpenAI API :
 
