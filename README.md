@@ -1,3 +1,12 @@
+Made by :
+
+Ben Hnia Intidhar
+
+Abdelkefi Farah
+
+Ben Hajla Nour
+
+
 # ChatzyApp :
 This application offers an innovative conversational experience, driven by a dynamic fusion of cutting-edge technologies. It employs the MVVM (Model-View-ViewModel) architecture to guarantee an organized structure,
 effectively managing data and user interactions. Featuring UI design, RecyclerView, Room database integration, and Retrofit for API communication, it goes beyond with advanced functionalities such as text copying 
