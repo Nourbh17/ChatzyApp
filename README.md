@@ -6,9 +6,13 @@ and sharing. Additionally, it seamlessly integrates the OpenAI API to enhance th
 # Features:
 
 Chat with ChatGPT in real-time.
+
 Create and manage new chats.
+
 Copy text from the chat interface.
+
 Text-to-voice and voice-to-text functionalities.
+
 API : OpenAI API https://platform.openai.com/docs/introduction
 
 # Details :
