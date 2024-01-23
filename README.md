@@ -69,6 +69,8 @@ In this crucial phase, we seamlessly incorporated the Room Database into our cha
 
 In this segment, we delve into the exciting process of incorporating robots into the Robot Screen, leveraging both Retrofit and the MVVM architecture.
 
+![Screenshot 2024-01-23 230553](https://github.com/Nourbh17/ChatzyApp/assets/92574404/4878fd06-dafc-403e-a5e8-11b4ebed8407)
+
 
 ![Screenshot 2024-01-23 232135](https://github.com/Nourbh17/ChatzyApp/assets/92574404/63f77188-04c4-41ef-b92d-1e900d8d0951)
 
