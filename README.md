@@ -59,6 +59,10 @@ The inclusion of intuitive popup menus enhances overall user interactions, contr
 ![Screenshot 2024-01-23 232554](https://github.com/Nourbh17/ChatzyApp/assets/92574404/b754661c-a21f-4ec7-b378-1e350641754b)
 
 
+![Screenshot (31)](https://github.com/Nourbh17/ChatzyApp/assets/92574404/50702786-2c3e-4625-8ec9-03d7b99f8763)
+
+
+
 # 4-Integrating OpenAI API :
 
 In this pivotal stage, we seamlessly integrated the OpenAI API into our application using Retrofit, unlocking the potential for engaging chat interactions powered by GPT-3. Our implementation involved making 
